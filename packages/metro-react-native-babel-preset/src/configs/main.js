@@ -164,9 +164,7 @@ const getPreset = (src, options) => {
       // the flow strip types plugin must go BEFORE class properties!
       // there'll be a test case that fails if you don't.
       flowPlugins,
-      {
-        plugins: defaultPlugins,
-      },
+      // the typescript types plugin must go BEFORE javascript ones!
       {
         test: isTypeScriptSource,
         plugins: [
@@ -178,6 +176,9 @@ const getPreset = (src, options) => {
         plugins: [
           [require('@babel/plugin-transform-typescript'), {isTSX: true}],
         ],
+      },
+      {
+        plugins: defaultPlugins,
       },
       {
         plugins: extraPlugins,
